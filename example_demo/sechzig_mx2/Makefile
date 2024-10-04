@@ -23,8 +23,8 @@ ${BUILDDIR}/top.json:  $(wildcard *.v)  $(wildcard ../../rtl/*.v)
 	yosys -p "synth_xilinx -flatten -abc9 -arch xc7 -top ${TOP}; write_json ${BUILDDIR}/top.json" $^ >> ${LOGFILE} 2>&1
 
 ${BUILDDIR}/top.fasm: ${BUILDDIR}/top.json
-	nextpnr-xilinx --chipdb ${DB_DIR}/../${PART}.bin --xdc ${XDC} --json ${BUILDDIR}/top.json --fasm $@ >> ${LOGFILE} 2>&1
-	
+	nextpnr-xilinx --chipdb ${DB_DIR}/../${PART}.bin --xdc ${XDC} --json ${BUILDDIR}/top.json --pre-place constraints.py --pre-route show_bels.py --fasm $@ >> ${LOGFILE} 2>&1
+
 ${BUILDDIR}/top.frames: ${BUILDDIR}/top.fasm
 	fasm2frames --part ${PARTFULL} --db-root ${DB_DIR} $< > $@
 

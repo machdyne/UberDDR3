@@ -147,7 +147,7 @@
         .MICRON_SIM(0), //enable faster simulation for micron ddr3 model (shorten POWER_ON_RESET_HIGH and INITIAL_CKE_LOW)
         .ODELAY_SUPPORTED(0), //set to 1 when ODELAYE2 is supported
         .SECOND_WISHBONE(0) //set to 1 if 2nd wishbone is needed 
-        ) ddr3_top
+        ) ddr3_top_inst
         (
             //clock and reset
             .i_controller_clk(i_controller_clk),
